@@ -16,13 +16,15 @@ const ProductList = styled.div`
     padding: 8px;
 `;
 
-export default class Column extends Component {
+export default class ProductsSection extends Component {
     render(){
+        console.log(this.props)
         return (
             <Container>
-                <Title>{this.props.day.title}</Title>
-                <Droppable droppableId={this.props.day.id}>
+                <Title>{this.props.title}</Title>
+                <Droppable droppableId={this.props.id}>
                     {(provided) => (
+                        
                         <ProductList
                             ref={provided.innerRef}
                             {...provided.droppableProps}
