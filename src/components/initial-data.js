@@ -1,19 +1,23 @@
 const initialData = {
     products: {
-        'task-1': {id: 'task-1', content: 'Take Out the garbage1'},
-        'task-2': {id: 'task-2', content: 'Take Out the garbage2'},
-        'task-3': {id: 'task-3', content: 'Take Out the garbage3'}
+        'product-1': {id: 'product-1', content: 'Take Out the garbage1'},
+        'product-2': {id: 'product-2', content: 'Take Out the garbage2'},
+        'product-3': {id: 'product-3', content: 'Take Out the garbage3'},
+        'product-4': {id: 'product-4', content: 'Take Out the garbage3'},
+        'product-5': {id: 'product-5', content: 'Take Out the garbage3'},
+        'product-6': {id: 'product-6', content: 'Take Out the garbage3'},
+        'product-7': {id: 'product-7', content: 'Take Out the garbage3'}
     },
     productsColumn: {
         id: 'products',
         title: 'Products',
-        productIds: ['task-1', 'task-2', 'task-3'],
+        productIds: ['product-1', 'product-2', 'product-3'],
     },
     days: {
         'monday': {
             id: 'monday',
             title: 'Monday',
-            productIds: ['task-1', 'task-2', 'task-3'],
+            productIds: [],
         },
         'tuesday': {
             id: 'tuesday',

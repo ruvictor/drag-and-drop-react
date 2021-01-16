@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import initialData from './initial-data';
 import Column from './column';
-import ProductsSection from './productsSection';
+import Product from './product';
 
 const Container = styled.div`
     display: flex;
@@ -98,39 +98,40 @@ export default class Main extends Component {
         return (
 
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <Container>
 
+
+                    <Container>
+                        {this.state.daysOrder.map((dayId) => {
+                            const day = this.state.days[dayId];
+                            const products = day.productIds.map(productId => this.state.products[productId]);
+                            
+                            return <Column key={day.id} day={day} products={products} />;
+                        })}
+                    </Container>
 
 
                     <ProductsBlock>
-                    <Title>{this.state.productsColumn.title}</Title>
-                    <Droppable droppableId={this.state.productsColumn.id}>
-                        {(provided) => (
-                            <ProductList
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                            >
-                                {Object.keys(this.state.products).reduce((product, index) => 
-                                    
-                                    // <ProductsSection key={product.id} product={product} index={index} />
-                                    console.log(product)
-                                    
-                                )}
-                                {provided.placeholder}
-                            </ProductList>
-                        )}
-                    </Droppable>
+                        <Title>{this.state.productsColumn.title}</Title>
+                        <Droppable droppableId={this.state.productsColumn.id}>
+                            {(provided) => (
+                                <ProductList
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {Object.keys(this.state.products).map((product, index) => 
+                                        
+                                        
+                                        <Product key={index} product={this.state.products[product]} index={index} />
+                                        
+                                    )}
+                                    {provided.placeholder}
+                                </ProductList>
+                            )}
+                        </Droppable>
                     </ProductsBlock>
 
 
-
-                    {this.state.daysOrder.map((dayId) => {
-                        const day = this.state.days[dayId];
-                        const products = day.productIds.map(productId => this.state.products[productId]);
-                        
-                        return <Column key={day.id} day={day} products={products} />;
-                    })}
-                </Container>
+                    
             </DragDropContext>
         )
     }
