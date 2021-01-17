@@ -6,7 +6,16 @@ import initialData from './initial-data';
 import Column from './column';
 import Product from './product';
 
-const Container = styled.div`
+const WeekDaysContainer = styled.div`
+    display: table;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    border: 5px solid #ddd;
+    border-radius: 5px;
+`;
+
+const WeekDaysBlock = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -99,17 +108,17 @@ export default class Main extends Component {
 
             <DragDropContext onDragEnd={this.onDragEnd}>
 
-
-                    <Container>
+                <WeekDaysContainer>
+                    <WeekDaysBlock>
                         {this.state.daysOrder.map((dayId) => {
                             const day = this.state.days[dayId];
                             const products = day.productIds.map(productId => this.state.products[productId]);
                             
                             return <Column key={day.id} day={day} products={products} />;
                         })}
-                    </Container>
-
-
+                    </WeekDaysBlock>
+                </WeekDaysContainer>
+                
                     <ProductsBlock>
                         <Title>{this.state.productsColumn.title}</Title>
                         <Droppable droppableId={this.state.productsColumn.id}>
