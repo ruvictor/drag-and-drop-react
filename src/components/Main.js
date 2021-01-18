@@ -37,9 +37,9 @@ export default class Main extends Component {
     state = initialData;
 
     onDragEnd = result => {
-        console.log(result);
+        
         const { destination, source, draggableId } = result;
-
+        // console.log('Result -> ' + result);
         if(!destination){
             return;
         }
@@ -51,11 +51,14 @@ export default class Main extends Component {
             return;
         }
 
-        const start = this.state.days[source.droppableId];
+        const start = source.droppableId === 'products' ?
+                this.state.productsColumn[source.droppableId] : 
+                this.state.days[source.droppableId];
         const finish = this.state.days[destination.droppableId];
 
-        // console.log('Start ' + this.state.days[source.droppableId]);
-        console.log('Finish ' + source.droppableId);
+        
+        // console.log('start -> ' + start);
+        // console.log('Finish -> ' + finish);
         
 
         // if(start === finish){
@@ -79,21 +82,35 @@ export default class Main extends Component {
         //     this.setState(newState);
         //     return;
         // }
-
+        
         // moving from one list to another
-        const startTaskIds = Array.from(start.productIds);
-        startTaskIds.splice(source.index, 1);
+        // console.log('start.products -> ' + start.products);
+        const startProductIds = Array.from(
+            source.droppableId === 'products' ? 
+            start.productIds : start.productIds);
+
+            // console.log(startProductIds);
+        
+            startProductIds.splice(source.index, 1);
         const newStart = {
             ...start,
-            productIds: startTaskIds,
+            productIds: startProductIds,
         };
 
-        const finishTaskIds = Array.from(finish.taskIds);
-        finishTaskIds.splice(destination.index, 0, draggableId);
+        // console.log(newStart);
+        
+
+        const finishProductIds = Array.from(finish.productIds);
+
+        console.log(draggableId);
+
+        finishProductIds.splice(destination.index, 0, draggableId);
         const newFinish = {
             ...finish,
-            productIds: finishTaskIds,
+            productIds: finishProductIds,
         };
+
+        // console.log(newFinish);
         
         const newState = {
             ...this.state,
@@ -101,9 +118,19 @@ export default class Main extends Component {
                 ...this.state.days,
                 [newStart.id]: newStart,
                 [newFinish.id]: newFinish
-            }
+            },
+            // productsColumn: {
+            //     ...this.state.productsColumn.products,
+            //     [this.state.productsColumn.products]: newFinish
+            // }
         };
         this.setState(newState);
+        // console.log(newState);
+        // if(source.droppableId === 'products'){
+        //     this.setState({
+        //         productsColumn['products']: ''
+        //     })
+        // }
     }
 
     render(){
@@ -123,8 +150,8 @@ export default class Main extends Component {
                 </WeekDaysContainer>
                 
                 <ProductsBlock>
-                    <Title>{this.state.productsColumn.title}</Title>
-                    <Droppable droppableId={this.state.productsColumn.id}>
+                    <Title>{this.state.productsColumn.products.title}</Title>
+                    <Droppable droppableId={this.state.productsColumn.products.id}>
                         {(provided) => (
                             <ProductList
                                 ref={provided.innerRef}

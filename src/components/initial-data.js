@@ -13,9 +13,11 @@ const initialData = {
         'product-7': {id: 'product-7', content: menu3}
     },
     productsColumn: {
-        id: 'products',
-        title: 'Products',
-        productIds: ['product-1', 'product-2', 'product-3'],
+        products:{
+            id: 'products',
+            title: 'Products',
+            productIds: ['product-1', 'product-2', 'product-3', 'product-4', 'product-5', 'product-6', 'product-7']
+        }
     },
     days: {
         'monday': {
