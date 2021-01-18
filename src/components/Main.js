@@ -8,9 +8,9 @@ import Product from './product';
 
 const WeekDaysContainer = styled.div`
     display: table;
-    margin: 0 auto;
+    margin: 10% auto 0;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     border: 5px solid #ddd;
     border-radius: 5px;
 `;
@@ -21,10 +21,10 @@ const WeekDaysBlock = styled.div`
     justify-content: center;
 `;
 const ProductsBlock = styled.div`
-    margin: 8px;
+    display: table;
+    margin: 35px auto 0;
     border: 1px solid lightgrey;
     border-radius: 2px;
-    width: 50%;
 `;
 const Title = styled.h3`
     padding: 8px;
@@ -37,23 +37,26 @@ export default class Main extends Component {
     state = initialData;
 
     onDragEnd = result => {
-        // const { destination, source, draggableId } = result;
-
-        // if(!destination){
-        //     return;
-        // }
-
-        // if(
-        //     destination.droppableId === source.droppableId &&
-        //     destination.index === source.index
-        // ) {
-        //     return;
-        // }
-
-        // const start = this.state.columns[source.droppableId];
-        // const finish = this.state.columns[destination.droppableId];
-
         console.log(result);
+        const { destination, source, draggableId } = result;
+
+        if(!destination){
+            return;
+        }
+
+        if(
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ) {
+            return;
+        }
+
+        const start = this.state.days[source.droppableId];
+        const finish = this.state.days[destination.droppableId];
+
+        // console.log('Start ' + this.state.days[source.droppableId]);
+        console.log('Finish ' + source.droppableId);
+        
 
         // if(start === finish){
         //     const newTaskIds = Array.from(start.taskIds);
@@ -77,30 +80,30 @@ export default class Main extends Component {
         //     return;
         // }
 
-        // // moving from one list to another
-        // const startTaskIds = Array.from(start.taskIds);
-        // startTaskIds.splice(source.index, 1);
-        // const newStart = {
-        //     ...start,
-        //     taskIds: startTaskIds,
-        // };
+        // moving from one list to another
+        const startTaskIds = Array.from(start.productIds);
+        startTaskIds.splice(source.index, 1);
+        const newStart = {
+            ...start,
+            productIds: startTaskIds,
+        };
 
-        // const finishTaskIds = Array.from(finish.taskIds);
-        // finishTaskIds.splice(destination.index, 0, draggableId);
-        // const newFinish = {
-        //     ...finish,
-        //     taskIds: finishTaskIds,
-        // };
+        const finishTaskIds = Array.from(finish.taskIds);
+        finishTaskIds.splice(destination.index, 0, draggableId);
+        const newFinish = {
+            ...finish,
+            productIds: finishTaskIds,
+        };
         
-        // const newState = {
-        //     ...this.state,
-        //     columns: {
-        //         ...this.state.columns,
-        //         [newStart.id]: newStart,
-        //         [newFinish.id]: newFinish
-        //     }
-        // };
-        // this.setState(newState);
+        const newState = {
+            ...this.state,
+            days: {
+                ...this.state.days,
+                [newStart.id]: newStart,
+                [newFinish.id]: newFinish
+            }
+        };
+        this.setState(newState);
     }
 
     render(){
@@ -119,25 +122,25 @@ export default class Main extends Component {
                     </WeekDaysBlock>
                 </WeekDaysContainer>
                 
-                    <ProductsBlock>
-                        <Title>{this.state.productsColumn.title}</Title>
-                        <Droppable droppableId={this.state.productsColumn.id}>
-                            {(provided) => (
-                                <ProductList
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                >
-                                    {Object.keys(this.state.products).map((product, index) => 
-                                        
-                                        
-                                        <Product key={index} product={this.state.products[product]} index={index} />
-                                        
-                                    )}
-                                    {provided.placeholder}
-                                </ProductList>
-                            )}
-                        </Droppable>
-                    </ProductsBlock>
+                <ProductsBlock>
+                    <Title>{this.state.productsColumn.title}</Title>
+                    <Droppable droppableId={this.state.productsColumn.id}>
+                        {(provided) => (
+                            <ProductList
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                            >
+                                {Object.keys(this.state.products).map((product, index) => 
+                                    
+                                    
+                                    <Product key={index} product={this.state.products[product]} index={index} />
+                                    
+                                )}
+                                {provided.placeholder}
+                            </ProductList>
+                        )}
+                    </Droppable>
+                </ProductsBlock>
 
 
                     

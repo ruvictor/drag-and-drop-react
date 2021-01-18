@@ -8,6 +8,8 @@ const Container = styled.div`
     margin-bottom: 8px;
     border-radius: 2px;
     background-color: #fff;
+    float: left;
+    box-sizing: border-box;
 `;
 
 
@@ -21,7 +23,7 @@ export default class Task extends Component {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        {this.props.product.content}
+                        <img src={this.props.product.content} alt="menu" style={{'width': '100px'}} />
                     </Container>
                 )}
             </Draggable>

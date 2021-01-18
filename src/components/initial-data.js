@@ -1,12 +1,16 @@
+import menu1 from '../assets/1.jpg';
+import menu2 from '../assets/2.jpg';
+import menu3 from '../assets/3.jpg';
+
 const initialData = {
     products: {
-        'product-1': {id: 'product-1', content: 'Take Out the garbage1'},
-        'product-2': {id: 'product-2', content: 'Take Out the garbage2'},
-        'product-3': {id: 'product-3', content: 'Take Out the garbage3'},
-        'product-4': {id: 'product-4', content: 'Take Out the garbage3'},
-        'product-5': {id: 'product-5', content: 'Take Out the garbage3'},
-        'product-6': {id: 'product-6', content: 'Take Out the garbage3'},
-        'product-7': {id: 'product-7', content: 'Take Out the garbage3'}
+        'product-1': {id: 'product-1', content: menu1},
+        'product-2': {id: 'product-2', content: menu2},
+        'product-3': {id: 'product-3', content: menu3},
+        'product-4': {id: 'product-4', content: menu1},
+        'product-5': {id: 'product-5', content: menu2},
+        'product-6': {id: 'product-6', content: menu1},
+        'product-7': {id: 'product-7', content: menu3}
     },
     productsColumn: {
         id: 'products',
