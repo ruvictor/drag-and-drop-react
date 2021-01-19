@@ -10,6 +10,8 @@ const Container = styled.div`
     background-color: #fff;
     float: left;
     box-sizing: border-box;
+    text-align: center;
+    font-size: 15px;
 `;
 
 
@@ -23,7 +25,8 @@ export default class Product extends Component {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <img src={this.props.product.content} alt="menu" style={{'width': '100px'}} />
+                        <img src={this.props.product.content} alt="menu" style={{'width': '100px'}} /><br />
+                        ${this.props.product.price}
                     </Container>
                 )}
             </Draggable>

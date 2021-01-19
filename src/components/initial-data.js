@@ -4,14 +4,15 @@ import menu3 from '../assets/3.jpg';
 
 const initialData = {
     products: {
-        'product-1': {id: 'product-1', content: menu1},
-        'product-2': {id: 'product-2', content: menu2},
-        'product-3': {id: 'product-3', content: menu3},
-        'product-4': {id: 'product-4', content: menu1},
-        'product-5': {id: 'product-5', content: menu2},
-        'product-6': {id: 'product-6', content: menu1},
-        'product-7': {id: 'product-7', content: menu3}
+        'product-1': {id: 'product-1', content: menu1, price: '50'},
+        'product-2': {id: 'product-2', content: menu2, price: '10'},
+        'product-3': {id: 'product-3', content: menu3, price: '6'},
+        'product-4': {id: 'product-4', content: menu1, price: '18'},
+        'product-5': {id: 'product-5', content: menu2, price: '11'},
+        'product-6': {id: 'product-6', content: menu1, price: '2'},
+        'product-7': {id: 'product-7', content: menu3, price: '3'}
     },
+    totalPrice: 0,
     productsColumn: {
         products:{
             id: 'products',

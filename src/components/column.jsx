@@ -5,12 +5,12 @@ import Product from './product';
 
 const Container = styled.div`
     margin: 8px;
-    border: 1px solid lightgrey;
     border-radius: 2px;
     width: 50%;
+    min-height: 195px;
 `;
 const Title = styled.h3`
-    padding: 8px;
+    text-align: center;
 `;
 const ProductList = styled.div`
     padding: 8px;
