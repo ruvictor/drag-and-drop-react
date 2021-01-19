@@ -11,6 +11,7 @@ const BodyBlock = styled.div`
     margin: 0;
     paddding: 0;
     width: 100%;
+    height: 100vh;
     display: table;
 `;
 const MainTitle = styled.h3`
@@ -42,6 +43,7 @@ const OrderInfo = styled.div`
     padding: 10px;
     font-weight: bold;
     font-size: 16px;
+    text-align: right;
 `;
 const ProductsBlock = styled.div`
     display: table;
