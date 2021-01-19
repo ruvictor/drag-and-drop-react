@@ -24,7 +24,7 @@ const MainTitle = styled.h3`
 `;
 const WeekDaysContainer = styled.div`
     display: table;
-    margin: 10% auto 0;
+    margin: 20px auto 0;
     width: 100%;
     max-width: 1070px;
     background-color: #fff;
@@ -133,7 +133,6 @@ export default class Main extends Component {
         source.droppableId === 'products' ? 
         this.state.products[draggableId].price : 0;
 
-
         const newState = {
             ...this.state,
             totalPrice: parseInt(currentItemPrice) + parseInt(this.state.totalPrice),
@@ -154,7 +153,6 @@ export default class Main extends Component {
         return (
             <BodyBlock>
                 <DragDropContext onDragEnd={this.onDragEnd}>
-
                     <WeekDaysContainer>
                         <MainTitle>Personalize Your Order</MainTitle>
                         <WeekDaysBlock>
@@ -169,7 +167,7 @@ export default class Main extends Component {
                         <p>Total: ${totalPrice}</p>
                         </OrderInfo>
                     </WeekDaysContainer>
-                    
+            
                     {this.state.productsColumn.products.productIds.length !== 0 ? 
                         (<ProductsBlock>
                             <Title>{this.state.productsColumn.products.title}</Title>
@@ -180,10 +178,7 @@ export default class Main extends Component {
                                         {...provided.droppableProps}
                                     >
                                         {this.state.productsColumn.products.productIds.map((product, index) => 
-                                            
-                                            
                                             <Product key={product} product={this.state.products[product]} index={index} />
-                                            
                                         )}
                                         {provided.placeholder}
                                     </ProductList>
@@ -192,8 +187,6 @@ export default class Main extends Component {
                         </ProductsBlock>) : 
                         <PlaceOrder>Place Order</PlaceOrder>
                     }
-
-                        
                 </DragDropContext>
             </BodyBlock>
         )
