@@ -39,8 +39,8 @@ export default class Main extends Component {
     onDragEnd = result => {
         
         const { destination, source, draggableId } = result;
-        // console.log('Result -> ' + result);
-        if(!destination){
+        console.log(destination);
+        if(!destination || destination.droppableId === 'products'){
             return;
         }
 
@@ -102,7 +102,7 @@ export default class Main extends Component {
 
         const finishProductIds = Array.from(finish.productIds);
 
-        console.log(draggableId);
+        // console.log(draggableId);
 
         finishProductIds.splice(destination.index, 0, draggableId);
         const newFinish = {
@@ -111,7 +111,18 @@ export default class Main extends Component {
         };
 
         // console.log(newFinish);
-        
+        // removing the item from products state
+        if(source.droppableId === 'products'){
+            const newpIDs = this.state.productsColumn.products.productIds;
+            const prodRemove = draggableId;
+            const remIndex = newpIDs.indexOf(prodRemove);
+            console.log(newpIDs);
+            newpIDs.splice(remIndex, 1);
+            console.log(newpIDs);
+            console.log(JSON.stringify(draggableId));
+        }
+
+
         const newState = {
             ...this.state,
             days: {
@@ -119,18 +130,21 @@ export default class Main extends Component {
                 [newStart.id]: newStart,
                 [newFinish.id]: newFinish
             },
-            // productsColumn: {
-            //     ...this.state.productsColumn.products,
-            //     [this.state.productsColumn.products]: newFinish
-            // }
+            productsColumn: {
+                ...this.state.productsColumn,
+                // [this.state.productsColumn.products.]: splice(removeProdIndex, 1)
+            }
         };
         this.setState(newState);
-        // console.log(newState);
+        console.log(newState);
+        // console.log(newProductsColumn);
         // if(source.droppableId === 'products'){
         //     this.setState({
         //         productsColumn['products']: ''
         //     })
         // }
+        // const removeProdIndex =  this.state.productsColumn.products.productIds.indexOf(draggableId);
+        
     }
 
     render(){
@@ -157,10 +171,10 @@ export default class Main extends Component {
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                             >
-                                {Object.keys(this.state.products).map((product, index) => 
+                                {this.state.productsColumn.products.productIds.map((product, index) => 
                                     
                                     
-                                    <Product key={index} product={this.state.products[product]} index={index} />
+                                    <Product key={product} product={this.state.products[product]} index={index} />
                                     
                                 )}
                                 {provided.placeholder}

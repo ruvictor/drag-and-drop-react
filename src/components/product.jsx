@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 
-export default class Task extends Component {
+export default class Product extends Component {
     render(){
         return (
             <Draggable draggableId={this.props.product.id} index={this.props.index}>
