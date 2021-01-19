@@ -48,15 +48,34 @@ const OrderInfo = styled.div`
 const ProductsBlock = styled.div`
     display: table;
     margin: 35px auto 0;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
+    border-radius: 5px;
     min-width: 842px;
+    background-color: #FFF;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
 `;
 const Title = styled.h3`
     padding: 8px;
 `;
 const ProductList = styled.div`
     padding: 8px;
+`;
+const PlaceOrder = styled.div`
+    display: table;
+    margin: 30px auto 0;
+    padding: 10px;
+    width: 100%;
+    max-width: 350px;
+    color: #fff;
+    background-color: #476B2D;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 17px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
 `;
 
 export default class Main extends Component {
@@ -151,26 +170,28 @@ export default class Main extends Component {
                         </OrderInfo>
                     </WeekDaysContainer>
                     
-                    <ProductsBlock>
-                        <Title>{this.state.productsColumn.products.title}</Title>
-                        <Droppable droppableId={this.state.productsColumn.products.id}>
-                            {(provided) => (
-                                <ProductList
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                >
-                                    {this.state.productsColumn.products.productIds.map((product, index) => 
-                                        
-                                        
-                                        <Product key={product} product={this.state.products[product]} index={index} />
-                                        
-                                    )}
-                                    {provided.placeholder}
-                                </ProductList>
-                            )}
-                        </Droppable>
-                    </ProductsBlock>
-
+                    {this.state.productsColumn.products.productIds.length !== 0 ? 
+                        (<ProductsBlock>
+                            <Title>{this.state.productsColumn.products.title}</Title>
+                            <Droppable droppableId={this.state.productsColumn.products.id}>
+                                {(provided) => (
+                                    <ProductList
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                    >
+                                        {this.state.productsColumn.products.productIds.map((product, index) => 
+                                            
+                                            
+                                            <Product key={product} product={this.state.products[product]} index={index} />
+                                            
+                                        )}
+                                        {provided.placeholder}
+                                    </ProductList>
+                                )}
+                            </Droppable>
+                        </ProductsBlock>) : 
+                        <PlaceOrder>Place Order</PlaceOrder>
+                    }
 
                         
                 </DragDropContext>
